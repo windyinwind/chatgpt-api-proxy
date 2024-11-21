@@ -90,3 +90,18 @@ curl http://127.0.0.1/v1/chat/completions \
 ```
 
 
+### 测试过的docker-compose.yml一键启动的脚本：
+```
+ ch-gptproxy:
+    restart: always
+    container_name: ch-gptproxy
+    hostname: ch-gptproxy
+    image: python:3.11.0
+    volumes:
+      - ./volumes/ch-gptproxy/app.py:/home/app.py:rw
+      - ./volumes/ch-gptproxy/requirements.txt:/home/requirements.txt:rw
+    command:
+      - /bin/sh
+      - -c
+      - "pip3 install -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple  -r /home/requirements.txt && python /home/app.py"
+```
